@@ -25,7 +25,7 @@ In the game, it will ask you for all three of these values. enter them, and your
 ## Building it Yourself
 * Clone the Repo
 * Navigate to the `GotifyNative` folder
-* `go build --buildmode=c-shared -ldflags="-s -w"  -o GotifyNative.dll gotify.go MelonLogger.go mono.go`
+* `go build -trimpath --buildmode=c-shared -ldflags="-s -w"  -o GotifyNative.dll gotify.go MelonLogger.go mono.go`
 * Place it in the `VrcSpotifyMod` directory
 * build the C# project
 
