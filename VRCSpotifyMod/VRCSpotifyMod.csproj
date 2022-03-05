@@ -189,13 +189,13 @@
     <EmbeddedResource Include="Images\heart-outline.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GotifyNative\go.mod" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="GotifyNative\go.sum" />
     <None Include="GotifyNative\gotify.go" />
     <None Include="GotifyNative\MelonLogger.go" />
     <None Include="GotifyNative\mono.go" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GotifyNative\go.mod" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
