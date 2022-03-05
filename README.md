@@ -22,3 +22,10 @@ In the game, it will ask you for all three of these values. enter them, and your
 * Note that should you not have ReMod.Core, the mod will inject it automatically. Please consider [downloading it yourself](https://github.com/RequiDev/ReMod.Core/releases/latest)
 * The Spotify API wrapper by [zmb3](https://github.com/zmb3/spotify)
 
+## Building it Yourself
+* Clone the Repo
+* Navigate to the `GotifyNative` folder
+* `go build --buildmode=c-shared -ldflags="-s -w"  -o GotifyNative.dll gotify.go MelonLogger.go mono.go`
+* Place it in the `VrcSpotifyMod` directory
+* build the C# project
+
