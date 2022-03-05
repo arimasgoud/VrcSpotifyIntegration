@@ -18,7 +18,6 @@ import (
 
 	"github.com/zmb3/spotify/v2"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
-	"golang.org/x/sys/windows"
 )
 
 //export HasRemodCore
@@ -526,7 +525,7 @@ func completeAuth(w http.ResponseWriter, r *http.Request) {
 }
 
 func CSString(str string) uintptr {
-	res, err := windows.UTF16PtrFromString(str)
+	res, err := syscall.UTF16PtrFromString(str)
 	if err != nil {
 		Instance.ErrorString("Failed to convert string to UTF16: " + err.Error())
 		return 0
