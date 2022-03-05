@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: MelonInfo(typeof(VRCSpotifyMod.VRCSpotifyMod), "VRCSpotifyIntegration", "0.0.1", "RinLovesYou")]
+[assembly: MelonInfo(typeof(VRCSpotifyMod.VRCSpotifyMod), "VRCSpotifyIntegration", "1.0.0", "RinLovesYou")]
 [assembly: MelonGame("VRChat", "VRChat")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
