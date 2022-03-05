@@ -19,6 +19,6 @@ In the game, it will ask you for all three of these values. enter them, and your
 ## Notes & Credits
 
 * This mod uses ReMod.Core by [RequiDev](https://github.com/RequiDev)
-* Note that should you not have ReMod.Core, the mod will inject it automatically. Please consider [downloading it yoursef](https://github.com/RequiDev/ReMod.Core/releases/latest)
+* Note that should you not have ReMod.Core, the mod will inject it automatically. Please consider [downloading it yourself](https://github.com/RequiDev/ReMod.Core/releases/latest)
 * The Spotify API wrapper by [zmb3](https://github.com/zmb3/spotify)
 
