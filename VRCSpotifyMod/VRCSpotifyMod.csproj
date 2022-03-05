@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3DFD89B9-060D-4444-872E-7BB0CA355238}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VRCSpotifyMod</RootNamespace>
+    <AssemblyName>VRCSpotifyMod</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MelonLoader">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ReMod.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\ReMod.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnhollowerBaseLib">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnhollowerRuntimeLib">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.UI.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.UI.Elements">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.UI.Shared">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.Utility">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.Utility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRCCore-Standalone">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRCLog">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCLog.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRCSDK2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK2.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRCSDK3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRCSDK3A, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK3A.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRCSDKBase">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NativeModule.cs" />
+    <Compile Include="RinMenu.cs" />
+    <Compile Include="Setup.cs" />
+    <Compile Include="VRCSpotifyMod.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\pause.png" />
+    <EmbeddedResource Include="Images\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\last.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GotifyNative.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\repeat-off.png" />
+    <EmbeddedResource Include="Images\repeat-once.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\heart-outline.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="GotifyNative\go.sum" />
+    <None Include="GotifyNative\gotify.go" />
+    <None Include="GotifyNative\MelonLogger.go" />
+    <None Include="GotifyNative\mono.go" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GotifyNative\go.mod" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+</Project>
