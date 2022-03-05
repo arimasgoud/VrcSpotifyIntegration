@@ -106,7 +106,7 @@ func UpdatePlayerInfo() {
 
 	mono.ThreadAttach()
 
-	mod, err := mono.GetAssemblyImage("VRCSpotifyMod")
+	mod, err := mono.GetAssemblyImage("VRCSpotifyIntegration")
 	if err != nil {
 		return
 	}
