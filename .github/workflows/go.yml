@@ -1,0 +1,25 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+defaults:
+  run:
+    working-directory: VRCSpotifyMod/GotifyNative
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+
+    - name: Build
+      run: go build -trimpath --buildmode=c-shared -ldflags="-s -w -buildid="  -o ../GotifyNative.dll gotify.go MelonLogger.go mono.go
