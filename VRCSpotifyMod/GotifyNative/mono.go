@@ -32,6 +32,8 @@ type Mono struct {
 	mono_class_get_namespace_          func(a ...uintptr) (r1 uintptr, r2 uintptr, err error)
 	mono_class_get_property_from_name_ func(a ...uintptr) (r1 uintptr, r2 uintptr, err error)
 	mono_assembly_get_name_            func(a ...uintptr) (r1 uintptr, r2 uintptr, err error)
+	mono_gchandle_new_                 func(a ...uintptr) (r1 uintptr, r2 uintptr, err error)
+	mono_gchandle_free_                func(a ...uintptr) (r1 uintptr, r2 uintptr, err error)
 	Domain                             uintptr
 	ImageCache                         map[string]uintptr
 }
@@ -60,6 +62,8 @@ func NewMono() (mono *Mono, err error) {
 	mono.mono_class_get_namespace_ = mono.monoLib.NewProc("mono_class_get_namespace").Call
 	mono.mono_class_get_property_from_name_ = mono.monoLib.NewProc("mono_class_get_property_from_name").Call
 	mono.mono_assembly_get_name_ = mono.monoLib.NewProc("mono_assembly_get_name").Call
+	mono.mono_gchandle_new_ = mono.monoLib.NewProc("mono_gchandle_new").Call
+	mono.mono_gchandle_free_ = mono.monoLib.NewProc("mono_gchandle_free").Call
 
 	mono.ImageCache = make(map[string]uintptr)
 
@@ -224,17 +228,21 @@ func (mono *Mono) NewObject(klass uintptr) (object uintptr, err error) {
 	return object, nil
 }
 
-func (mono *Mono) NewString(str string) (object uintptr, err error) {
+func (mono *Mono) NewString(str string) (object uintptr, gcHandle uintptr, err error) {
 	str1 := C.CString(str + "\000")
 	ptr := uintptr(unsafe.Pointer(str1))
-	defer C.free(unsafe.Pointer(str1))
 
 	object, _, err = mono.mono_string_new_(mono.Domain, ptr)
 	if err != nil && object == 0 {
-		return 0, err
+		return 0, 0, err
 	}
 
-	return object, nil
+	gcHandle, _, err = mono.mono_gchandle_new_(object)
+	if err != nil && gcHandle == 0 {
+		return 0, 0, err
+	}
+
+	return object, gcHandle, nil
 }
 
 func (mono *Mono) RuntimeInvoke(method uintptr, obj uintptr, params []uintptr) (ret uintptr, err error) {

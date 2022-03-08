@@ -25,6 +25,7 @@ var mono, funnyError = NewMono()
 
 type LoggerInstance struct {
 	pointer_      uintptr
+	handle_       uintptr
 	classPointer_ uintptr
 
 	name_ string
@@ -59,14 +60,21 @@ func NewLoggerInstance(name string) (instance *LoggerInstance, err error) {
 		}
 	}
 
-	nameString, err := mono.NewString(name)
+	nameString, stringHandle, err := mono.NewString(name)
 	if err != nil {
 		return nil, err
 	}
 
+	defer mono.mono_gchandle_free_(stringHandle)
+
 	instance.pointer_, err2 = mono.NewObject(instance.classPointer_)
 	if err2 != nil {
 		return nil, err2
+	}
+
+	instance.handle_, _, err = mono.mono_gchandle_new_(instance.pointer_)
+	if err != nil && instance.handle_ == 0 {
+		return nil, err
 	}
 
 	args := make([]uintptr, 1)
@@ -78,6 +86,10 @@ func NewLoggerInstance(name string) (instance *LoggerInstance, err error) {
 
 func (instance *LoggerInstance) Name() string {
 	return instance.name_
+}
+
+func (instance *LoggerInstance) Destroy() {
+	mono.mono_gchandle_free_(instance.handle_)
 }
 
 func (instance *LoggerInstance) MsgObj(obj uintptr) (err error) {
@@ -104,10 +116,12 @@ func (instance *LoggerInstance) MsgString(str string) (err error) {
 	}
 
 	args := make([]uintptr, 1)
-	args[0], err = mono.NewString(str)
+	var handle uintptr
+	args[0], handle, err = mono.NewString(str)
 	if err != nil {
 		return err
 	}
+	defer mono.mono_gchandle_free_(handle)
 
 	mono.RuntimeInvoke(instance.msgString_, instance.pointer_, args)
 	return nil
@@ -122,10 +136,12 @@ func (instance *LoggerInstance) WarningString(str string) (err error) {
 	}
 
 	args := make([]uintptr, 1)
-	args[0], err = mono.NewString(str)
+	var handle uintptr
+	args[0], handle, err = mono.NewString(str)
 	if err != nil {
 		return err
 	}
+	defer mono.mono_gchandle_free_(handle)
 
 	mono.RuntimeInvoke(instance.warningString_, instance.pointer_, args)
 	return nil
@@ -140,11 +156,12 @@ func (instance *LoggerInstance) ErrorString(str string) (err error) {
 	}
 
 	args := make([]uintptr, 1)
-	args[0], err = mono.NewString(str)
+	var handle uintptr
+	args[0], handle, err = mono.NewString(str)
 	if err != nil {
 		return err
 	}
-
+	defer mono.mono_gchandle_free_(handle)
 	mono.RuntimeInvoke(instance.errorString_, instance.pointer_, args)
 	return nil
 }

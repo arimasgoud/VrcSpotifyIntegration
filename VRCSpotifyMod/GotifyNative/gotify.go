@@ -122,16 +122,26 @@ func UpdatePlayerInfo() {
 
 	time.Sleep(time.Second / 4)
 	args := make([]uintptr, 4)
-	args[0], err = mono.NewString(Playing())
-	args[1], err = mono.NewString(GetVolume())
-	args[2], err = mono.NewString(GetRepeat())
+	var handle1 uintptr
+	var handle2 uintptr
+	var handle3 uintptr
+	var handle4 uintptr
+	args[0], handle1, err = mono.NewString(Playing())
+	args[1], handle2, err = mono.NewString(GetVolume())
+	args[2], handle3, err = mono.NewString(GetRepeat())
 	var favorited string
 	if GetFavorited() {
 		favorited = "Favorited!"
 	} else {
 		favorited = "Not Favorited"
 	}
-	args[3], err = mono.NewString(favorited)
+	args[3], handle4, err = mono.NewString(favorited)
+
+	defer mono.mono_gchandle_free_(handle1)
+	defer mono.mono_gchandle_free_(handle2)
+	defer mono.mono_gchandle_free_(handle3)
+	defer mono.mono_gchandle_free_(handle4)
+
 	if err != nil {
 		return
 	}
@@ -246,8 +256,8 @@ func GetFavorited() bool {
 		return false
 	}
 
-	for _, track := range library.Tracks {
-		if track.ID == current.Item.ID {
+	for _, item := range library.Tracks {
+		if item.ID == current.Item.ID {
 			return true
 		}
 	}

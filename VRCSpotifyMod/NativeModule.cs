@@ -175,7 +175,6 @@ namespace VRCSpotifyMod
 				ex.Data.Add("LastWin32Error", lastWin32Error);
 				throw new Exception("Can't find exported function \"" + name + "\"", ex);
 			}
-			VRCSpotifyMod.Log.Msg($"{name} - {GetProcAddress(_nativeModulePtr, name)}");
 			return delegateForFunctionPointer;
 		}
 
