@@ -56,6 +56,8 @@ func Login(id, token, port uintptr) uintptr {
 	srv := &http.Server{Addr: fmt.Sprintf(":%s", spotify_port)}
 	var err error
 
+	mono.ThreadAttach()
+
 	Instance, err = NewLoggerInstance("GotifyNative")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -74,7 +76,9 @@ func Login(id, token, port uintptr) uintptr {
 	go func() {
 		err := srv.ListenAndServe()
 		if err != nil {
-
+			mono.ThreadAttach()
+			Instance.ErrorString("Failed to start HTTP server: " + err.Error())
+			return
 		}
 	}()
 

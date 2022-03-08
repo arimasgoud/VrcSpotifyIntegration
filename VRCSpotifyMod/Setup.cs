@@ -2,6 +2,7 @@
 using ReMod.Core.VRChat;
 using System.Collections;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
 using VRC.SDKBase;
@@ -54,7 +55,7 @@ namespace VRCSpotifyMod
                 var _isSetup = VRCSpotifyMod.Spotify_Id.Value != "" && VRCSpotifyMod.Spotify_Secret.Value != "";
 
                 if (_isSetup)
-                    MelonCoroutines.Start(VRCSpotifyMod.LoginRoutine(VRCSpotifyMod.Spotify_Id.Value, VRCSpotifyMod.Spotify_Secret.Value, VRCSpotifyMod.Spotify_Port.Value));
+                    Task.Run(() => VRCSpotifyMod.LogMeIn(VRCSpotifyMod.Spotify_Id.Value, VRCSpotifyMod.Spotify_Secret.Value, VRCSpotifyMod.Spotify_Port.Value));
             });
         }
     }

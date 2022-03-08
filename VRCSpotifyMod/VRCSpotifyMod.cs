@@ -58,7 +58,7 @@ namespace VRCSpotifyMod
             CacheIcons();
 
             if (_isSetup)
-                MelonCoroutines.Start(LoginRoutine(Spotify_Id.Value, Spotify_Secret.Value, Spotify_Port.Value));
+                Task.Run(() => LogMeIn(Spotify_Id.Value, Spotify_Secret.Value, Spotify_Port.Value));
             
             OnUIManagerInitialized(() =>
             {
@@ -93,7 +93,7 @@ namespace VRCSpotifyMod
             }
         }
 
-        public static IEnumerator LoginRoutine(string id, string token, string port)
+        public static void LogMeIn(string id, string token, string port)
         {
             var res = GotifyNative.Login(id, token, port);
             if (res == null)
@@ -101,7 +101,6 @@ namespace VRCSpotifyMod
                 Log.Error("Failed to get a response from the native Spotify module. Please try logging in again in-game!");
             }
             Log.Msg(res);
-            yield break;
         }
 
         private void LoadReModCore()
