@@ -147,6 +147,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnableDisableListener.cs" />
     <Compile Include="NativeModule.cs" />
     <Compile Include="RinMenu.cs" />
     <Compile Include="Setup.cs" />

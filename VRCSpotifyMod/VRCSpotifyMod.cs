@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using HarmonyLib;
+using MelonLoader;
 using ReMod.Core.Managers;
 using ReMod.Core.VRChat;
 using System;
@@ -13,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TMPro;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core;
@@ -30,7 +32,20 @@ namespace VRCSpotifyMod
 
         public static NativeModule GotifyNative;
 
+        public static bool IsSetup 
+        { 
+            get
+            {
+                return _isSetup;
+            }
+            set
+            {
+                _isSetup = value;
+            }
+        }
+
         private static bool _isSetup;
+        private static bool _iHaveShownFunnyPopup = false;
 
         public VRCSpotifyMod()
         {
@@ -53,16 +68,22 @@ namespace VRCSpotifyMod
 
             MelonPreferences.Save();
 
+            ClassInjector.RegisterTypeInIl2Cpp<EnableDisableListener>();
+
             _isSetup = Spotify_Id.Value != "" && Spotify_Secret.Value != "";
 
             CacheIcons();
 
             if (_isSetup)
                 Task.Run(() => LogMeIn(Spotify_Id.Value, Spotify_Secret.Value, Spotify_Port.Value));
-            
+
+            InitializePatches();
+
             OnUIManagerInitialized(() =>
             {
                 RinMenu.PrepareMenu();
+                var edl = QuickMenuEx.Instance.gameObject.AddComponent<EnableDisableListener>();
+                edl.OnEnableEvent += RinMenu.ShouldIExist;
             });
         }
 
@@ -84,13 +105,30 @@ namespace VRCSpotifyMod
             while (QuickMenuEx.Instance == null)
                 yield return null;
             code();
-            while (VRCPlayer.field_Internal_Static_VRCPlayer_0 == null)
-                yield return null;
-            if (!_isSetup)
+        }
+
+        private HarmonyMethod GetLocalPatch(string name)
+        {
+            return this.GetType().GetMethod(name, BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod();
+        }
+
+        private void InitializePatches()
+        {
+            harmonyInstance.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), GetLocalPatch(nameof(PlayerAwakePatch)));
+        }
+
+        private static void PlayerAwakePatch(VRCPlayer __instance)
+        {
+            if (__instance == null) return;
+
+            __instance.Method_Public_add_Void_OnAvatarIsReady_0(new Action(() =>
             {
-                yield return new WaitForSeconds(1f);
-                Setup.FirstTime();
-            }
+                if (!_isSetup && !_iHaveShownFunnyPopup && __instance == VRCPlayer.field_Internal_Static_VRCPlayer_0)
+                {
+                    Setup.FirstTime();
+                    _iHaveShownFunnyPopup = true;
+                }
+            }));
         }
 
         public static void LogMeIn(string id, string token, string port)

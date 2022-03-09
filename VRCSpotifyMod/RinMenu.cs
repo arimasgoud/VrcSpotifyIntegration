@@ -13,10 +13,11 @@ namespace VRCSpotifyMod
         public static ReMenuCategory VolumeCategory;
         public static ReMenuButton RepeatButton;
         public static ReMenuButton FavoriteButton;
+        public static ReTabButton MyTabButton;
         public static void PrepareMenu()
         {
             var page = new ReCategoryPage("VrcSpotifyIntegration", true);
-            ReTabButton.Create("SpotifyTab", "VRCSpotifyIntegration tab", "VrcSpotifyIntegration", ResourceManager.GetSprite("Spotify.logo"));
+            MyTabButton = ReTabButton.Create("SpotifyTab", "VRCSpotifyIntegration tab", "VrcSpotifyIntegration", ResourceManager.GetSprite("Spotify.logo"));
             PlayingCategory = page.AddCategory("<color=#03dffc>Vrc</color><color=#03fc3d>Spotify</color><color=#03dffc>Integration</color>", false);
             VolumeCategory = page.AddCategory("Volume: NaN");
             var text = PlayingCategory.Header.GameObject.GetComponentInChildren<TextMeshProUGUI>(true);
@@ -42,6 +43,11 @@ namespace VRCSpotifyMod
             VolumeCategory.AddButton("Vol. Down", "Decrease the Volume by 10%", () => Task.Run(GotifyNative.VolumeDown), ResourceManager.GetSprite("Spotify.minus"));
             FavoriteButton = VolumeCategory.AddButton("Favorite", "Favorite/Unfavorite the current song", () => Task.Run(GotifyNative.Favorite), ResourceManager.GetSprite("Spotify.heart"));
 
+        }
+
+        public static void ShouldIExist()
+        {
+            MyTabButton.Active = IsSetup;
         }
     }
 }

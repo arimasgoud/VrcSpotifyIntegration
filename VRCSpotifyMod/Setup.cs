@@ -15,6 +15,12 @@ namespace VRCSpotifyMod
         public static VRCUiPopupManager Manager() => VRCUiPopupManager.prop_VRCUiPopupManager_0;
         public static void FirstTime()
         {
+            MelonCoroutines.Start(FirstTimePopup());
+        }
+
+        public static IEnumerator FirstTimePopup()
+        {
+            yield return new WaitForSeconds(3f);
             Manager().ShowStandardPopupV2("Welcome to VRChatSpotifyIntegration!", "To get set up, please click Okay and follow the instructions in the ReadMe, then continue in VRChat.", "Okay", () =>
             {
                 Process.Start("https://github.com/RinLovesYou/VrcSpotifyIntegration");
@@ -55,7 +61,10 @@ namespace VRCSpotifyMod
                 var _isSetup = VRCSpotifyMod.Spotify_Id.Value != "" && VRCSpotifyMod.Spotify_Secret.Value != "";
 
                 if (_isSetup)
+                {
                     Task.Run(() => VRCSpotifyMod.LogMeIn(VRCSpotifyMod.Spotify_Id.Value, VRCSpotifyMod.Spotify_Secret.Value, VRCSpotifyMod.Spotify_Port.Value));
+                    VRCSpotifyMod.IsSetup = true;
+                }
             });
         }
     }
