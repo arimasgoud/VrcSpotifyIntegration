@@ -12,7 +12,7 @@ On the top right, click on `Edit Settings`, and add a callback URL like this.
 ### Important:
 the url **Has** to be `http`
 
-![image](https://user-images.githubusercontent.com/29461788/157617637-004d4240-0952-40be-b0b7-8f9bf415e51e.png)
+![image](https://user-images.githubusercontent.com/29461788/157617637-004d4240-0952-40be-b0b7-8f9bf415e51e.png)<br>
 The port number is up to you, just remember it.
 
 Click `Add`, and click `Save` at the bottom
